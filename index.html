@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中原力行宿舍網路報修</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>力行宿舍網路報修申請</h1>
+    </header>
+
+    <div id="instruction-trigger" class="instruction">
+        <p><input id="set_instr" type="radio" value="hello" required>填寫前請閱讀 <span id="popup-open">報修說明</span></p>
+    </div>
+    
+    <div id="popup-window" class="popup-hidden">
+        <div class="popup-content">
+            <h2>報修說明</h2>
+            <ul>
+                <li>報修前請確認已完成註冊。</li>
+                <li>報修前請至註冊系統確認是否有異狀（如管制狀態）。</li>
+                <li>維修限於學校網路設備，個人設備問題不予處理。</li>
+                <li>流量異常解除每三天限一次，重複報修不予處理。</li>
+                <li>網頁無法使用或有問題時，請至傳達室填寫紙本報修單。</li>
+                <li>本表單個人資料收集僅限幹部或學校資訊處等相關單位維修使用，送出表單表示已同意在此限制內使用被資料收集。</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <form id="post_google" onsubmit="return validateForm()">
+            <h2>請填寫以下資料</h2>
+            <div class="form-group">
+                <label for="name">姓名</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="flex_form">
+                <div class="form-group">
+                    <label for="student-class">系級</label>
+                    <input type="text" id="student-class" name="student-class" class="first" placeholder="例：資管一甲" required>
+                </div>
+                <div class="form-group">
+                    <label for="student-id">學號</label>
+                    <input type="number" id="student-id" name="student-id" pattern="\d{8}" min="10000000" max="11999999" placeholder="8位數字" title="學號必須是8位數字" required>
+                </div>
+            </div>
+            
+            <div class="room_num">
+                <div class="form-group">
+                    <label for="room">寢室號碼</label>
+                    <input type="number" id="room" name="room" pattern="\d{3}" min="101" max="483" placeholder="3位數字" title="房號必須是3位數字" required>
+                </div>
+                <div class="form-group">
+                    <label for="table_num_select">桌號</label>
+                    <select id="table_num_select" name="table_num_select" required>
+                        <option value="" disabled selected>請選擇桌號</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="issue_category">問題類別</label>
+                <select id="issue_category" name="issue_category"  required>
+                    <option value="" disabled selected>請選擇問題類別</option>
+                    <option value="不能連校外網站">不能連校外網站</option>
+                    <option value="不能連校內網站">不能連校內網站</option>
+                    <option value="無法連至BIG-IP Edge client">無法連至BIG-IP Edge client</option>
+                    <option value="流量異常">流量異常</option>
+                    <option value="網路孔損壞">網路孔損壞</option>
+                </select>
+                <input type="hidden" id="issue_category_hidden" name="issue_category_hidden">
+            </div>
+
+            <div class="flex_form">
+                <div class="form-group">
+                    <label>IP地址</label>
+                    <div class="ip-group">
+                        <input type="number" name="ip1" id="ip1" class="ip-segment" value="140" readonly>
+                        <span>.</span>
+                        <input type="number" name="ip2" id="ip2" class="ip-segment" value="135" readonly>
+                        <span>.</span>
+                        <input type="number" name="ip3" id="ip3" class="ip-segment" min="24" max="31" required>
+                        <span>.</span>
+                        <input type="number" name="ip4" id="ip4" class="ip-segment" min="0" max="254" required>
+                        <input type="hidden" name="ip" id="ip" value="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="mac">MAC位址</label>
+                    <input type="text" name="mac" id="mac" pattern="\d{12}" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>工作列網路狀態</label>
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="repair_type" value="Normal">
+                        <img src="img/normal.JPG" alt="硬體問題">正常
+                    </label>
+                    <label>
+                        <input type="radio" name="repair_type" value="Unnormal">
+                        <img src="img/exclamation.JPG" alt="軟體問題">異常
+                    </label>
+                    <label>
+                        <input type="radio" name="repair_type" value="Error">
+                        <img src="img/error.JPG" alt="網路問題">錯誤
+                    </label>
+                    <input type="hidden" id="repair_type_hidden" name="repair_type_hidden">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>時間登記 （20:00 ~ 23:00）</label>
+                <label>在寢室時段，多選</label>
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="available_days" value="Mon.">星期一
+                    </label>
+                    <label>
+                        <input type="checkbox" name="available_days" value="Tue.">星期二
+                    </label>
+                    <label>
+                        <input type="checkbox" name="available_days" value="Wed.">星期三
+                    </label>
+                    <label>
+                        <input type="checkbox" name="available_days" value="Thur.">星期四
+                    </label>
+                    <label>
+                        <input type="checkbox" name="available_days" value="Fri.">星期五
+                    </label>
+                    <input type="hidden" id="available_days_hidden" name="available_days_hidden">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="issue">詳細狀況描述</label>
+                <textarea id="issue" name="issue" placeholder="什麼時候開始無法使用？硬體或軟體問題？在其他地方有線網路是否可以正常使用？" required></textarea>
+            </div>
+            
+            <button type="submit">提交申請</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+    <script src="jquery/jquery-3.7.1.min.js"></script>
+    <script src="form.js"></script>
+</body>
+</html>

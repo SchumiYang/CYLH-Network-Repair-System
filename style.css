@@ -1,0 +1,290 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --input-padd: 1.5vh
+}
+
+body {
+    font-family: "Noto Sans TC", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #f4f4f4, #e0e0e0);
+}
+
+header {
+    background: #0064a9;
+    color: white;
+    padding: 5vh 0;
+    text-align: center;
+    box-shadow: 0 0.8vh 1.6vh rgba(0,0,0,0.2);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 4vh;
+}
+
+#popup-window {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#popup-window.popup-visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup-content {
+    background: white;
+    padding: 40px;
+    border-radius: 10px;
+    max-width: 90vw;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content li {
+    list-style-type:decimal;
+}
+
+#popup-open {
+    cursor: pointer;
+    color: #0064a9;
+    text-decoration: underline;
+}
+
+#popup-open:hover {
+    color: #0375c1;
+}
+
+
+.instruction, .container {
+    width: 90vw;
+    max-width: 60%;
+    margin: 3vh auto;
+    padding: 0 4vw;
+    box-sizing: border-box;
+}
+
+.instruction p, form {
+    background: white;
+    padding: 6vh;
+    border-radius: 2vh;
+    box-shadow: 0 1.2vh 2.4vh rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.instruction p {
+    display: flex;
+    align-items: center;
+    font-size: 2vh;
+}
+
+.instruction p input{
+    width: 2vh;
+    height: 2vh;
+    margin-right: 1vh;
+}
+
+form:hover {
+    box-shadow: 0 2vh 4vh rgba(0,0,0,0.2);
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 2vh;
+    font-size: 3vh;
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 2vh;
+}
+
+label {
+    display: block;
+    margin-bottom: 1.6vh;
+    font-size: 2vh;
+    font-weight: bold;
+    color: #555;
+}
+
+input, textarea {
+    width: 100%;
+    padding: var(--input-padd);
+    border: 0.2vh solid #ddd;
+    border-radius: 1.6vh;
+    box-sizing: border-box;
+    font-size: 2vh;
+    transition: border-color 0.3s ease;
+}
+
+input:focus, textarea:focus {
+    border-color: #0064a9;
+    outline: none;
+}
+
+.room_num, .flex_form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.room_num input, .flex_form .first {
+    width: 95%;
+    margin: 0 1vw 0 0;
+}
+
+.flex_form {
+    display: flex;
+    margin: 2vh 0;
+}
+
+.ip-group {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.ip-segment {
+    padding: var(--input-padd);
+    margin-right: 0.5vh;
+    text-align: center;
+    border: 0.2vh solid #ddd;
+    border-radius: 1vh;
+    font-size: 2vh;
+}
+
+.ip-group span {
+    margin-right: 1vh;
+    font-weight: bold;
+    font-size: 2vh;
+}
+
+select {
+    width: 100%;
+    padding: var(--input-padd);
+    border: 0.2vh solid #ddd;
+    border-radius: 1.6vh;
+    font-size: 2vh;
+    box-sizing: border-box;
+}
+
+.radio-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 0;
+    width: 33%;
+}
+
+.radio-group img {
+    width: 4.5vh;
+    height: 4vh;
+    margin-right: 2vh;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 0px;
+    width: 20%;
+}
+
+.radio-group input, .checkbox-group input {
+    width: 5vh;
+    height: 1.5vh;
+}
+
+textarea {
+    resize: none;
+    min-height: 24vh;
+}
+
+button {
+    width: 100%;
+    background: #0064a9;
+    color: white;
+    border: none;
+    padding: 2vh 2vw;
+    border-radius: 1.6vh;
+    cursor: pointer;
+    font-size: 2vh;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #0375c1;
+}
+
+@media (max-width: 800px) {
+    .popup-content{
+        max-width: 90%;
+        margin: 0 3vh;
+    }
+
+    .instruction, .container {
+        max-width: 90%;
+        padding: 0 2vw;
+    }
+
+    .insttr_set, form {
+        padding: 3vh;
+    }
+
+    button {
+        width: 100%;
+        padding: 3vh;
+    }
+
+    .radio-group, .checkbox-group {
+        flex-direction: column;
+    }
+
+    .radio-group label, .checkbox-group label {
+        width: 100%;
+        margin: 2vh 0;
+    }
+
+    .flex_form {
+        flex-direction: column;
+    }
+
+    .flex_form .first {
+        width: 100%;
+    }
+
+    .ip-segment {
+        margin-right: 0.5vw;
+    }
+}
